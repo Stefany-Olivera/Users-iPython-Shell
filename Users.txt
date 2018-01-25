@@ -1,0 +1,58 @@
+-->Retrieve all users:
+from apps.userlogin_app.models import *
+
+-->Last user:
+Users.objects.last()
+<Users: Users object>
+ 
+b=Users.objects.last()
+b.first_name
+u'Froily'
+
+-->Create:
+ Users.objects.create(first_name="Gery",last_name="Olivera",email_address="gery@gmail.com",age="23")
+<Users: Users object>
+
+Users.objects.all()
+<QuerySet [<Users: Users object>, <Users: Users object>, <Users: Users object>]>
+
+ b=Users.objects.create(first_name="Gery",last_name="Olivera",email_address ="gery@gmail.com",age="23")
+ b.save()
+
+ b=Users.objects.create(first_name="Froily",last_name="Olivera",email_address="froily@gmail.com",age="23")
+ b.save()
+
+-->First user:
+Users.objects.first()
+<Users: Users object>
+
+Users.objects.first().first_name
+u'Gery'
+
+-->Sort by first name:
+Users.objects.all().order_by("first_name").values("first_name")
+<QuerySet [{'first_name': u'Alida'}, {'first_name': u'Froily'}, {'first_name': u'Gerardo'}, {'first_name': u'Gery'}, {'first_name': u'Gery'}, {'first_name': u'Gery'}, {'first_name': u'Gery'}]>
+
+-->Show all values:
+Users.objects.all()
+<QuerySet [<Users: Users object>, <Users: Users object>, <Users: Users object>, <Users: Users object>, <Users: Users object>]>
+
+Users.objects.all().values()
+<QuerySet [{'first_name': u'Gery', 'last_name': u'Olivera', 'created_at': datetime.datetime(2018, 1, 25, 16, 18, 23, 701613, tzinfo=<UTC>), 'updated_at': datetime.datetime(2018, 1, 25, 16, 18, 23, 701987, tzinfo=<UTC>), u'id': 1, 'email_address': u'gery@gmail.com', 'age': 23}, {'first_name': u'Gery', 'last_name': u'Olivera', 'created_at': datetime.datetime(2018, 1, 25, 17, 43, 22, 525594, tzinfo=<UTC>), 'updated_at': datetime.datetime(2018, 1, 25, 17, 43, 22, 525706, tzinfo=<UTC>), u'id': 2, 'email_address': u'gery@gmail.com', 'age': 23}, {'first_name': u'Gery', 'last_name': u'Olivera', 'created_at': datetime.datetime(2018, 1, 25, 18, 8, 19, 412923, tzinfo=<UTC>), 'updated_at': datetime.datetime(2018, 1, 25, 18, 8, 19, 413235, tzinfo=<UTC>), u'id': 3, 'email_address': u'gery@gmail.com', 'age': 23}, {'first_name': u'Gery', 'last_name': u'Olivera', 'created_at': datetime.datetime(2018, 1, 25, 18, 10, 14, 970267, tzinfo=<UTC>), 'updated_at': datetime.datetime(2018, 1, 25, 18, 10, 21, 853928, tzinfo=<UTC>), u'id': 4, 'email_address': u'gery@gmail.com', 'age': 23}, {'first_name': u'Froily', 'last_name': u'Olivera', 'created_at': datetime.datetime(2018, 1, 25, 18, 27, 23, 779449, tzinfo=<UTC>), 'updated_at': datetime.datetime(2018, 1, 25, 18, 27, 34, 665882, tzinfo=<UTC>), u'id': 5, 'email_address': u'froily@gmail.com', 'age': 23}]>
+
+-->Get id=3 and update:
+c=Users.objects.get(id=3)
+c.last_name="Perez"
+c.save()
+
+Users.objects.get(id=3).last_name
+u'Perez'
+
+-->Delete id=4:
+Users.objects.get(id=4).delete()
+(1, {u'userlogin_app.Users': 1})
+
+Users.objects.all().order_by("first_name").values("first_name","last_name")
+<QuerySet [{'first_name': u'Alida', 'last_name': u'Reyes'}, {'first_name': u'Froily', 'last_name': u'Olivera'}, {'first_name': u'Gerardo', 'last_name': u'Feliciano'}, {'first_name': u'Gery', 'last_name': u'Olivera'}, {'first_name': u'Gery', 'last_name': u'Olivera'}, {'first_name': u'Gery', 'last_name': u'Olivera'}]>
+
+
